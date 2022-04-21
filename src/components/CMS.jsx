@@ -3,14 +3,15 @@ it works when running `npm start`, but
 it fails when running `npm run build` with 
 "Named export 'Builder' not found" error 
 */
-// import { Builder, BuilderComponent } from '@builder.io/react';
+
+import { Builder, BuilderComponent } from '@builder.io/react';
 
 /* comment out above code and uncomment code below for "recommended" CJS import, 
 this now fails under [vite] SSR error with "ReferenceError: Builder is not defined"
 */
 
-import pkg from '@builder.io/react';
-const { Builder, BuilderComponent } = pkg;
+// import pkg from '@builder.io/react';
+// const { Builder, BuilderComponent } = pkg;
 
 /* rest of module */
 import registerComponents from './register-components';
