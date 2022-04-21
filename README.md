@@ -1,43 +1,23 @@
-# Astro Starter Kit: Minimal
+# Astro Import Issue on Build
+
+This repo reproduces an issue with third-party ecosystem modules that present as CJS modules under npm,
+but typically have rollup build `"module": "dist/builder-react.es5.js",` pseudo-ES6 module presentation that
+works under vite, webpack, nextJS, etc.
+
+This project will work when run with `npm start`.
+
+However, when trying to build with `npm run build`, it throws an error based on the import in
+file `/src/components/CMS.jsx`:
 
 ```
-npm init astro -- --template minimal
+ error   Named export 'Builder' not found. The requested module '@builder.io/react' is a CommonJS module, which may not support all module.exports as named exports.
+  CommonJS modules can always be imported via the default export, for example using:
+  
+  import pkg from '@builder.io/react';
+  const { Builder, BuilderComponent, builder } = pkg;
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
+If this recommendation is implemented, the code now fails under vite SSR because the imports are `undefined`.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command           | Action                                       |
-|:----------------  |:-------------------------------------------- |
-| `npm install`     | Installs dependencies                        |
-| `npm run dev`     | Starts local dev server at `localhost:3000`  |
-| `npm run build`   | Build your production site to `./dist/`      |
-| `npm run preview` | Preview your build locally, before deploying |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://github.com/withastro/astro) or jump into our [Discord server](https://astro.build/chat).
+The intermediate issue (the first error) was added recently to astro and IMO this error needs to be disabled or be
+configurable.
