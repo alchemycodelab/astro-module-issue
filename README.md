@@ -7,7 +7,7 @@ works under vite, webpack, nextJS, etc.
 This project will work when run with `npm start`.
 
 However, when trying to build with `npm run build`, it throws an error based on the import in
-file [`/src/components/CMS.jsx`](`/src/components/CMS.jsx`):
+file [`/src/components/CMS.jsx`](./src/components/CMS.jsx):
 
 ```
  error   Named export 'Builder' not found. The requested module '@builder.io/react' is a CommonJS module, which may not support all module.exports as named exports.
