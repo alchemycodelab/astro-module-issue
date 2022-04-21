@@ -1,0 +1,19 @@
+---
+import { builder } from '@builder.io/react';
+import CMS from '../components/CMS';
+builder.init('b9c103cda0f24735921c917287d4fc23');
+
+const page = await builder.get('page', { url: '/example' }).promise();
+
+---
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>Astro with React and CMS</h1>
+		<CMS page={page}/>
+	</body>
+</html>
