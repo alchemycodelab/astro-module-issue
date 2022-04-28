@@ -2,10 +2,14 @@
   "name": "@example/minimal",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "prebuild": "mv src/pages src/pages-dev && mv src/pages-build src/pages",
     "build": "astro build",
+    "cms": "astro build",
+    "postbuild": "mv src/pages src/pages-build && mv src/pages-dev src/pages",
     "preview": "astro preview"
   },
   "devDependencies": {

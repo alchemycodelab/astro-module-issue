@@ -1,8 +1,11 @@
 ---
-import { builder } from '@builder.io/react';
-import CMS from '../components/CMS';
+import pkg from '@builder.io/react';
+import registerComponents from '../components/register-components';
 
+const { builder, Builder, BuilderComponent } = pkg;
 builder.init('b9c103cda0f24735921c917287d4fc23');
+
+registerComponents(Builder);
 
 const page = await builder.get('page', { url: '/example' }).promise();
 
@@ -15,6 +18,6 @@ const page = await builder.get('page', { url: '/example' }).promise();
 	</head>
 	<body>
 		<h1>Astro with React and CMS</h1>
-		<CMS page={page} client:load/>
+		<BuilderComponent model="page" content={page} />
 	</body>
 </html>
